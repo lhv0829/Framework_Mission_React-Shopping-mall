@@ -1,8 +1,11 @@
 import getData from "../assets/data";
+import { dataType } from "../constants/constants";
 import CarouselContainer from "./CarouselContainer";
+import ProductContainer from "./ProductContainer";
 import Product from "./ProductContainer";
 import { useEffect, useState } from "react";
 // import  url  from "../constants/constants"
+import { categoryArray, categoryType } from "../constants/constants";
 
 const MainPage = () => {
   const url = 'https://fakestoreapi.com/products';
@@ -16,21 +19,10 @@ const MainPage = () => {
     };
     fetchData();
   }, []);
-  console.log(datas);
-  // const data = async() => {
-  //   const data = await getData(url);
-  //   return data;
-  // };
-  // console.log(data);
-  
-  // console.log(data);
-  // console.log(`MainPage내 ${data}`);
-  // console.log(typeof data);
-  // console.log(typeof data[0]);
   return(
     <section className="main pt-16">
       <CarouselContainer></CarouselContainer>
-      <Product></Product>
+      {categoryArray.map((category) => <ProductContainer category={category} datas={datas} key={categoryArray.indexOf(category)}></ProductContainer>)}
     </section>
   )
 };
