@@ -7,10 +7,25 @@ export const Category = {
   jewelery: '액세서리',
 } as const;
 
-type categoryType = typeof Category[keyof typeof Category];
+export type categoryType = typeof Category[keyof typeof Category];
 
 export const ProductCategoryEnum = {
     FASHION: { cat: "fashion", title: "패션", list: ["men's clothing", "women's clothing"] },
     ACCESSORY: { cat: "accessory", title: "액세서리", list: ["jewelery"] },
     DIGITAL: { cat: "digital", title: "디지털", list: ["electronics"] },
 } as const;
+
+export type dataType = {
+  category: keyof typeof Category
+  description: string
+  id: number
+  image: string
+  price: number
+  rating: {
+    rate: number
+    count: number
+  }
+  title:string
+}
+
+export const categoryArray = ["패션", '디지털', '액세서리'];
