@@ -1,6 +1,7 @@
+import { Link } from "react-router-dom";
 import Cart from "./Cart";
-import LinkButton from "./LinkButton";
 import ModeSwitch from "./ModeSwitch";
+import { categoryList } from "../constants/constants";
 const Nav = () => {
   return (
     <div className="navbar fixed z-10 shadow-lg light:bg-white bg-neutral text-neutral-content">
@@ -9,14 +10,9 @@ const Nav = () => {
         <label htmlFor="side-menu" className="btn btn-square flex-none w-10 sm:w-auto lg:hidden">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="inline-block w-5 h-5 stroke-current"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
         </label>
-        <h1 className="shrink-0 flex md:flex-none flex-1 mx-1 sm:mx-2"><a className="text-white font-bold text-lg btn-ghost cursor-pointer">React Shop</a></h1>
+        <h1 className="shrink-0 flex md:flex-none flex-1 mx-1 sm:mx-2"><Link to={'/'} className="text-white font-bold text-lg btn-ghost cursor-pointer">React Shop</Link></h1>
         <div className="flex-none hidden md:flex md:flex-1 ml-2">
-          <LinkButton href="">패션</LinkButton>
-          <LinkButton href="">액세서리</LinkButton>
-          <LinkButton href="">디지털</LinkButton>
-          {/* <a href="" className="btn btn-sm rounded-btn flex items-center font-bold">패션</a> */}
-          {/* <a href="" className="btn btn-sm rounded-btn flex items-center font-bold">액세서리</a>
-          <a href="" className="btn btn-sm rounded-btn flex items-center font-bold">디지털</a> */}
+          {categoryList.map((category) => <Link to={`/${category.cat}`} key={category.cat} className="btn btn-sm rounded-btn flex items-center font-bold light:text-gray-700 text-white">{category.title}</Link>)}
         </div>
         <div className="flex items-center px-2">
           <label htmlFor="" className="swap swap-rotate mr-2 sm:mr-4">
