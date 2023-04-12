@@ -5,7 +5,7 @@ const HomePage = () => {
   return(
     <section className="drawer-content">
       <Nav></Nav>
-      <MainPage></MainPage>
+      {/* <MainPage></MainPage> */}
     </section>
   )
 };

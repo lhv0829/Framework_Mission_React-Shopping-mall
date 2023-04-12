@@ -15,6 +15,8 @@ export const ProductCategoryEnum = {
     DIGITAL: { cat: "digital", title: "디지털", list: ["electronics"] },
 } as const;
 
+export const categoryList = Object.values(ProductCategoryEnum)
+
 export type dataType = {
   category: keyof typeof Category
   description: string
@@ -28,4 +30,8 @@ export type dataType = {
   title:string
 }
 
-export const categoryArray = ["패션", '디지털', '액세서리'];
+export const categoryArray = ["패션", '액세서리', '디지털'];
+
+export type ProductProps = {
+  item:dataType
+}

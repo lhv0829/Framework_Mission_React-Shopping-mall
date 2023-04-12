@@ -12,18 +12,21 @@ const CarouselContainer = () => {
        text='이제 막 도착한 패션 청바지를 구경해보세요.'
        img={fashion}
        imgAlt='패션'
+       to='/fashion'
        ></CarouselSlide>
        <CarouselSlide 
        title="신속한 업무처리!" 
        text='다양한 디지털 제품을 둘러보세요.'
        img={digital}
        imgAlt='디지털'
+       to='/digital'
        ></CarouselSlide>
        <CarouselSlide 
        title="신선한 식품!" 
        text='농장 직배송으로 더욱 신선한 식료품을 만나보세요.'
        img={grocery}
        imgAlt='식품'
+       to='/grocery'
        ></CarouselSlide>  
     </Carousel>
   )
