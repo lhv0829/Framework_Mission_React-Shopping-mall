@@ -30,6 +30,20 @@ export type dataType = {
   title:string
 }
 
+export type putCartType = {
+  category: keyof typeof Category
+  description: string
+  id: number
+  image: string
+  price: number
+  rating: {
+    rate: number
+    count: number
+  }
+  title:string
+  amount:number
+}
+
 export const categoryArray = ["패션", '액세서리', '디지털'];
 
 export type ProductProps = {

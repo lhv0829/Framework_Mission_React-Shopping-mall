@@ -1,7 +1,32 @@
 import { Link } from "react-router-dom";
-import { dataType } from "../constants/constants";
+import { putCartType } from "../constants/constants";
+import { useEffect, useState } from 'react'
+import { useRecoilState } from "recoil";
+import { cartState } from "../atom/cartState";
 
-const CartItem = ({ item }:{item:dataType}) => {
+const CartItem = ({ item }:{item:putCartType}) => {
+  const [cartItems, setCartItems] = useRecoilState<putCartType[]>(cartState);
+
+  useEffect(() => {
+    const storedCartItems = localStorage.getItem("cartItems");
+    if (storedCartItems) {
+      setCartItems(JSON.parse(storedCartItems));
+    }
+  }, []);
+
+  // 수량 감소 버튼 클릭 시 실행되는 함수
+  const handleDecrement = (id: number) => {
+    setCartItems(prev =>
+      prev.map(item =>
+        item.id === id ? { ...item, amount: item.amount - 1 } : item
+      ).filter(item => item.amount > 0) // amount가 0인 아이템 제외
+    );
+  };
+
+  useEffect(() => {
+    localStorage.setItem("cartItems", JSON.stringify(cartItems.filter(item => item.amount > 0)));
+  }, [cartItems]);
+
   return(
     <div>
       <div className="lg:flex lg:items-center mt-4 px-2 lg:px-0">
@@ -9,18 +34,20 @@ const CartItem = ({ item }:{item:dataType}) => {
           <figure className="w-56 min-w-full flex-shrink-0 rounded-2xl overflow-hidden px-4 py-4 bg-white">
             <img src={item.image} alt={item.title} className="object-contain w-full h-48"/>
           </figure>
-          <div className="card-body px-1 lg:px-12">
-            <h2 className="card-title"><Link to={`/product/${item.id}`}>{item.title}</Link></h2>
-            <p className="mt-2 mb-4 text-3xl">{`$${item.price}`}</p>
-            <div className="card-actions">
-              <div className="btn-group">
-                <button className="btn btn-primary">-</button>
-                <button className="btn btn-ghost no-animation">0</button>
-                <button className="btn btn-primary">+</button>
-              </div>
+        </Link>
+        <div className="card-body px-1 lg:px-12">
+          <h2 className="card-title">
+            <Link to={`/product/${item.id}`} className="link link-hover">{item.title}</Link>
+          </h2>
+          <p className="mt-2 mb-4 text-3xl">{`$${Math.round(item.price)}`}</p>
+          <div className="card-actions">
+            <div className="btn-group">
+              <button className="btn btn-primary" onClick={() => handleDecrement(item.id)}>-</button>
+              <button className="btn btn-ghost no-animation">{item.amount}</button>
+              <button className="btn btn-primary">+</button>
             </div>
           </div>
-        </Link>
+        </div>
       </div>
     </div>
   )

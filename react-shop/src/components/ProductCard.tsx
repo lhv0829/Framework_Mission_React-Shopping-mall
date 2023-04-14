@@ -11,7 +11,7 @@ const ProductCard = ({ item } : {item:dataType}) => {
       </figure>
       <div className="card-body bg-gray-100 dark:bg-gray-700 rounded-b-xl">
         <p className="card-title text-base">{item.title}</p>
-        <p className="text-base">{`$${item.price}`}</p>
+        <p className="text-base">{`$${Math.round(item.price)}`}</p>
       </div>
     </Link>
   )
