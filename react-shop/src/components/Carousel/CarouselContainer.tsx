@@ -4,10 +4,13 @@ import fashion from '../../assets/img_shop_fashion.jpeg'
 import CarouselSlide from './CarouselSlide';
 import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
+import { carouselContents } from '../../constants/constants';
 const CarouselContainer = () => {
   return(
     <Carousel autoPlay={true} infiniteLoop={true} showStatus={false} showThumbs={false} className='carousel-container'>
-       <CarouselSlide 
+       {carouselContents.map(slide => <CarouselSlide key={slide.title} title={slide.title} 
+        text={slide.text} img={slide.img} imgAlt={slide.imgAlt} to={slide.to}></CarouselSlide>)}
+       {/* <CarouselSlide 
        title="물빠진 청바지!" 
        text='이제 막 도착한 패션 청바지를 구경해보세요.'
        img={fashion}
@@ -27,7 +30,7 @@ const CarouselContainer = () => {
        img={grocery}
        imgAlt='식품'
        to='/grocery'
-       ></CarouselSlide>  
+       ></CarouselSlide>   */}
     </Carousel>
   )
 };
