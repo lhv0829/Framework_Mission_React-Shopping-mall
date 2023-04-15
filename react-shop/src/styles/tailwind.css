@@ -6,3 +6,8 @@
   max-width: 50%;
   max-height: 50%;
 }
+
+.menu{
+  top: 112px;
+  flex-wrap: nowrap;
+}

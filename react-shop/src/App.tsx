@@ -12,13 +12,14 @@ import CategoryPage from './components/CategoryPage'
 import CartPage from './components/CartPage'
 import { RecoilRoot, useRecoilState, useRecoilValue } from 'recoil'
 import { darkModeState } from './atom/darkModeState'
+import { dataState } from './atom/dataState'
 
 function App() {
-  const [datas, setDatas] = useState([]);
-  const url = 'https://fakestoreapi.com/products';
+  const [datas, setDatas] = useRecoilState(dataState);
   const isDarkMode = useRecoilValue(darkModeState);
-
+  
   useEffect(() => {
+    const url = 'https://fakestoreapi.com/products';
     const fetchData = async () => {
       const data = await getData(url);
       setDatas(data);
