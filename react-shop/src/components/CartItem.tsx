@@ -14,13 +14,19 @@ const CartItem = ({ item }:{item:putCartType}) => {
     }
   }, []);
 
-  // 수량 감소 버튼 클릭 시 실행되는 함수
   const handleDecrement = (id: number) => {
     setCartItems(prev =>
       prev.map(item =>
         item.id === id ? { ...item, amount: item.amount - 1 } : item
       ).filter(item => item.amount > 0) // amount가 0인 아이템 제외
     );
+  };
+
+  const handleIncrement = (id: number) => {
+    setCartItems(prev =>
+      prev.map(item =>
+        item.id === id ? { ...item, amount: item.amount + 1 } : item
+      ));
   };
 
   useEffect(() => {
@@ -44,7 +50,7 @@ const CartItem = ({ item }:{item:putCartType}) => {
             <div className="btn-group">
               <button className="btn btn-primary" onClick={() => handleDecrement(item.id)}>-</button>
               <button className="btn btn-ghost no-animation">{item.amount}</button>
-              <button className="btn btn-primary">+</button>
+              <button className="btn btn-primary" onClick={() => handleIncrement(item.id)}>+</button>
             </div>
           </div>
         </div>
