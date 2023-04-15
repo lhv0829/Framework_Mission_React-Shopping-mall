@@ -1,6 +1,6 @@
-import digital from '../assets/img_shop_digital.jpeg'
-import grocery from '../assets/img_shop_grocery.jpeg'
-import fashion from '../assets/img_shop_fashion.jpeg'
+import digital from '../../assets/img_shop_digital.jpeg'
+import grocery from '../../assets/img_shop_grocery.jpeg'
+import fashion from '../../assets/img_shop_fashion.jpeg'
 import CarouselSlide from './CarouselSlide';
 import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';

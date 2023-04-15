@@ -1,5 +1,5 @@
 import { Link, useParams } from "react-router-dom";
-import { dataType } from "../constants/constants";
+import { dataType } from "../../constants/constants";
 
 
 const ProductCard = ({ item } : {item:dataType}) => {

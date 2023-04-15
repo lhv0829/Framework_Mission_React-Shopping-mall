@@ -1,8 +1,8 @@
 import { useRecoilValue } from "recoil";
-import { dataType } from "../constants/constants";
-import BuyModal from "./BuyModal";
+import { dataType } from "../../constants/constants";
+import BuyModal from "../BuyModal";
 import CartItem from "./CartItem";
-import { cartState } from "../atom/cartState";
+import { cartState } from "../../atom/cartState";
 import NoCartItem from "./NoCartItem";
 
 const CartPage = ({datas} : {datas:dataType[]}) => {

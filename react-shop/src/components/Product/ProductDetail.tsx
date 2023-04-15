@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
-import { Category, dataType, putCartType } from "../constants/constants";
-import StarRating from "./StarRating";
+import { Category, dataType, putCartType } from "../../constants/constants";
+import StarRating from "../StarRating";
 import { useState,useEffect } from 'react'
 import { useRecoilState } from "recoil";
-import { cartState } from "../atom/cartState";
+import { cartState } from "../../atom/cartState";
 
 function convertDataToDataType(data: dataType): putCartType {
   return {

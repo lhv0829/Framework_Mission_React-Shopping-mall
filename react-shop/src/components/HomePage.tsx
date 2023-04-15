@@ -1,5 +1,5 @@
 import MainPage from "./MainPage";
-import Nav from "./Nav";
+import Nav from "./NavigationBar/Nav";
 
 const HomePage = () => {
   return(

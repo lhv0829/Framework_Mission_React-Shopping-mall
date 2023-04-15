@@ -1,5 +1,5 @@
 import { dataType, Category } from "../constants/constants";
-import ProductCard from "./ProductCard";
+import ProductCard from "./Product/ProductCard";
 
 const CategoryPage = ({category, datas}:{category:string, datas:dataType[]}) => {
   const categoryData = datas.filter(item => category === Category[item.category]);

@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
-import { putCartType } from "../constants/constants";
+import { putCartType } from "../../constants/constants";
 import { useEffect, useState } from 'react'
 import { useRecoilState } from "recoil";
-import { cartState } from "../atom/cartState";
+import { cartState } from "../../atom/cartState";
 
 const CartItem = ({ item }:{item:putCartType}) => {
   const [cartItems, setCartItems] = useRecoilState<putCartType[]>(cartState);

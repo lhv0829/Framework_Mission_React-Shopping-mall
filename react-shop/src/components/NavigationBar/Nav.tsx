@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
-import { categoryList } from "../constants/constants";
+import { categoryList } from "../../constants/constants";
 import ThemeSwitch from "./ThemeSwitch";
 import { useRecoilState } from "recoil";
-import { darkModeState } from "../atom/darkModeState";
-import CartIcon from "./CartIcon";
+import { darkModeState } from "../../atom/darkModeState";
+import CartIcon from "../Cart/CartIcon";
 import Search from "./Search";
 
 const Nav = () => {

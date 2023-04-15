@@ -1,7 +1,7 @@
 import { useState,useEffect } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
-import { dataState } from "../atom/dataState";
-import { dataType } from "../constants/constants";
+import { dataState } from "../../atom/dataState";
+import { dataType } from "../../constants/constants";
 import { Link } from "react-router-dom";
 
 const Search = () => {

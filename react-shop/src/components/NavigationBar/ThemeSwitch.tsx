@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { useRecoilState } from 'recoil';
-import { darkModeState } from '../atom/darkModeState';
+import { darkModeState } from '../../atom/darkModeState';
 
 const ThemeSwitch = () => {
   const [isDarkMode, setIsDarkMode] = useRecoilState(darkModeState);

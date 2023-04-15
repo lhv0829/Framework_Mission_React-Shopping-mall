@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { categoryList } from "../constants/constants";
+import { categoryList } from "../../constants/constants";
 
 const DrawerSide = () => {
   

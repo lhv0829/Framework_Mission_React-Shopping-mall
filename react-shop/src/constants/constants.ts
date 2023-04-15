@@ -1,4 +1,6 @@
-export const url = 'https://fakestoreapi.com/products';
+import digital from '../assets/img_shop_digital.jpeg'
+import grocery from '../assets/img_shop_grocery.jpeg'
+import fashion from '../assets/img_shop_fashion.jpeg'
 
 export const Category = {
   "men's clothing": '패션',
@@ -45,6 +47,14 @@ export type putCartType = {
 }
 
 export const categoryArray = ["패션", '액세서리', '디지털'];
+export const carouselContent = [
+  {
+    title:"물빠진 청바지!",
+    text:"이제 막 도착한 패션 청바지를 구경해보세요.",
+    img:fashion,
+    
+  }
+]
 
 export type ProductProps = {
   item:dataType

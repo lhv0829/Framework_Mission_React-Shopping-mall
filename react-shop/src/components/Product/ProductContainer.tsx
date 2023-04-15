@@ -1,8 +1,6 @@
-import { dataType } from "../constants/constants";
+import { dataType } from "../../constants/constants";
 import ProductCard from "./ProductCard";
-import { useState, useEffect } from "react";
-import getData from "../assets/data";
-import { ProductCategoryEnum, Category } from "../constants/constants";
+import { Category } from "../../constants/constants";
 
 const ProductContainer = ({category, datas}:{category:string, datas:dataType[]}) => {
   const categoryData = datas.filter(item => category === Category[item.category]).slice(0,4);

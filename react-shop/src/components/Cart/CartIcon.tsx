@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { useRecoilValue } from "recoil";
-import { cartState } from "../atom/cartState";
+import { cartState } from "../../atom/cartState";
 
 const CartIcon = () => {
   const cartItems = useRecoilValue(cartState);

@@ -1,8 +1,6 @@
-import getData from "../assets/data";
 import { categoryList, dataType } from "../constants/constants";
-import CarouselContainer from "./CarouselContainer";
-import ProductContainer from "./ProductContainer";
-import Product from "./ProductContainer";
+import CarouselContainer from "./Carousel/CarouselContainer";
+import ProductContainer from "./Product/ProductContainer";
 import { useEffect, useState } from "react";
 
 const MainPage = ({ datas }: { datas : dataType[] }) => {
