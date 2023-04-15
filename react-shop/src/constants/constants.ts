@@ -70,7 +70,3 @@ export const carouselContents = [
     to:"/grocery",
   }
 ]
-
-export type ProductProps = {
-  item:dataType
-}

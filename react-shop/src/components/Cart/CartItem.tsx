@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { putCartType } from "../../constants/constants";
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { useRecoilState } from "recoil";
 import { cartState } from "../../atom/cartState";
 

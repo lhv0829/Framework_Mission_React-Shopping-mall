@@ -1,6 +1,6 @@
-import { categoryList, dataType } from "../constants/constants";
-import CarouselContainer from "./Carousel/CarouselContainer";
-import ProductContainer from "./Product/ProductContainer";
+import { categoryList, dataType } from "../../constants/constants";
+import CarouselContainer from "../Carousel/CarouselContainer";
+import ProductContainer from "../Product/ProductContainer";
 import { useEffect, useState } from "react";
 
 const MainPage = ({ datas }: { datas : dataType[] }) => {

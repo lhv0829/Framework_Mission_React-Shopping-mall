@@ -23,7 +23,6 @@ const ThemeSwitch = () => {
     const updatedIsDarkMode = !isDarkMode;
     setIsDarkMode(updatedIsDarkMode);
     localStorage.setItem("darkMode", updatedIsDarkMode.toString());
-    console.log(isDarkMode);
   };
 
   return (

@@ -1,5 +1,5 @@
 import { useRecoilState } from "recoil";
-import { cartState } from "../atom/cartState";
+import { cartState } from "../../atom/cartState";
 
 const BuyModal = () => {
   const [cartItems, setCartItems] = useRecoilState(cartState);

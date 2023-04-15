@@ -27,20 +27,13 @@ const Search = () => {
   };
 
   useEffect(() => {
-    console.log(searchValue);
+
     if(searchValue === "") setFilteredDatas([]);
     else setFilteredDatas(datas.filter(product => {
       const regex = new RegExp(searchValue, 'i');
       return regex.test(product.title);
     }));
-    // else setFilteredDatas(datas.filter(product => product.title.includes(searchValue.toLowerCase())))
   },[searchValue])
-
-  useEffect(() => {
-    console.log(filteredDatas);
-  },[filteredDatas]);
-
-
 
   return (
     <div className="dropdown">
