@@ -6,9 +6,9 @@ import './styles/tailwind.css'
 import { RecoilRoot } from 'recoil'
 
 ReactDOM.createRoot(document.getElementById('app') as HTMLElement).render(
-  <RecoilRoot>
-    <React.StrictMode>
+  <React.StrictMode>
+    <RecoilRoot>
       <App />
-    </React.StrictMode>
-  </RecoilRoot>,
+    </RecoilRoot>,
+  </React.StrictMode>
 )

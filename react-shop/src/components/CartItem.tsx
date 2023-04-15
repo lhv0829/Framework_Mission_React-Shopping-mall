@@ -18,7 +18,7 @@ const CartItem = ({ item }:{item:putCartType}) => {
     setCartItems(prev =>
       prev.map(item =>
         item.id === id ? { ...item, amount: item.amount - 1 } : item
-      ).filter(item => item.amount > 0) // amount가 0인 아이템 제외
+      ).filter(item => item.amount > 0)
     );
   };
 

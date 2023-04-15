@@ -4,21 +4,20 @@ import { darkModeState } from '../atom/darkModeState';
 
 const ThemeSwitch = () => {
   const [isDarkMode, setIsDarkMode] = useRecoilState(darkModeState);
-  console.log(`default: ${isDarkMode}`);
 
   useEffect(() => {
     const themeButton = document.querySelector('.js-theme') as HTMLInputElement;
     if (isDarkMode) {
       themeButton.checked = true;
     } else themeButton.checked = false;
-  }, []);
-  const storedDarkMode = localStorage.getItem("darkMode");
-
-  if (storedDarkMode === "true") {
-    setIsDarkMode(true);
-  } else if (storedDarkMode === "false") {
-    setIsDarkMode(false);
-  }
+    const storedDarkMode = localStorage.getItem("darkMode");
+  
+    if (storedDarkMode === "true") {
+      setIsDarkMode(true);
+    } else if (storedDarkMode === "false") {
+      setIsDarkMode(false);
+    }
+  }, [isDarkMode]);
 
   const toggleTheme = () => {
     const updatedIsDarkMode = !isDarkMode;
