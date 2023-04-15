@@ -24,14 +24,17 @@ const Search = () => {
 
   const valueChange = (valueStr:string) => {
     setSearchValue(valueStr);
-    console.log(searchValue);
-    if(valueStr === "") setFilteredDatas([]);
-    else {
-      const filterData = datas.filter(product => product.title.includes(valueStr.toLowerCase()));
-      setFilteredDatas(filterData);
-    }
-    console.log(filteredDatas);
   };
+
+  useEffect(() => {
+    console.log(searchValue);
+    if(searchValue === "") setFilteredDatas([]);
+    else setFilteredDatas(datas.filter(product => {
+      const regex = new RegExp(searchValue, 'i');
+      return regex.test(product.title);
+    }));
+    // else setFilteredDatas(datas.filter(product => product.title.includes(searchValue.toLowerCase())))
+  },[searchValue])
 
   useEffect(() => {
     console.log(filteredDatas);
