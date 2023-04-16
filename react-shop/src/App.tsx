@@ -1,31 +1,52 @@
-import { useEffect } from 'react'
+import { useEffect, lazy, Suspense, useState } from 'react'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import './App.css'
 import Nav from './components/NavigationBar/Nav'
-import MainPage from './components/Page/MainPage'
+// import MainPage from './components/Page/MainPage'
 import Footer from './components/Footer/Footer'
 import getData from './assets/data'
 import DrawerSide from './components/NavigationBar/DrawerSide'
-import ProductDetail from './components/Product/ProductDetail'
+// import ProductDetail from './components/Product/ProductDetail'
 import { dataType, categoryList } from './constants/constants'
-import CategoryPage from './components/Page/CategoryPage'
-import CartPage from './components/Cart/CartPage'
+// import CategoryPage from './components/Page/CategoryPage'
+// import CartPage from './components/Cart/CartPage'
 import { useRecoilState, useRecoilValue } from 'recoil'
 import { darkModeState } from './atom/darkModeState'
 import { dataState } from './atom/dataState'
 import NotFound from './components/Page/NotFound'
+import { cartState } from './atom/cartState'
+import Loader from './components/Loader'
 
 function App() {
   const [datas, setDatas] = useRecoilState(dataState);
   const isDarkMode = useRecoilValue(darkModeState);
+  const [cartItems, setCartItems] = useRecoilState(cartState);
+  const [isLoading, setIsLoading] = useState(true);
+  const [isError, setIsError] = useState(false);
+
+  const MainPage = lazy(() => import('./components/Page/MainPage'));
+  const ProductDetail = lazy(() => import('./components/Product/ProductDetail'));
+  const CategoryPage = lazy(() => import('./components/Page/CategoryPage'));
+  const CartPage = lazy(() => import('./components/Cart/CartPage'))
   
   useEffect(() => {
     const url = 'https://fakestoreapi.com/products';
     const fetchData = async () => {
-      const data = await getData(url);
-      setDatas(data);
+      setIsError(false);
+      setIsLoading(true);
+
+      try {
+        const data = await getData(url);
+        setDatas(data);
+      } catch (error) {
+        setIsError(true);
+      }
+
+      setIsLoading(false);
     };
     fetchData();
+    const currentCartItems = localStorage.getItem('CART_ITEMS') as string;
+    setCartItems(JSON.parse(currentCartItems));
   }, []);
 
   useEffect(() => {
@@ -45,13 +66,15 @@ function App() {
         <section className={`drawer-content`}>
             <Nav></Nav>
             <section className='main pt-16'>
-              <Routes>
-                <Route path='/' element={<MainPage datas={datas}></MainPage>}></Route>
-                {datas.map((item:dataType) => <Route path={`/product/${item.id}`} key={item.id} element={<ProductDetail item={item}></ProductDetail>}></Route>)}
-                {categoryList.map((category) => <Route path={`/${category.cat}`} key={category.cat} element={<CategoryPage category={category.title} datas={datas}></CategoryPage>}></Route>)}
-                <Route path='/cart' element={<CartPage datas={datas}></CartPage>}></Route>
-                <Route path='*' element={<NotFound></NotFound>}></Route>
-              </Routes>
+              <Suspense fallback={<Loader></Loader>}>
+                <Routes>
+                  <Route path='/' element={<MainPage datas={datas}></MainPage>}></Route>
+                  {datas.map((item:dataType) => <Route path={`/product/${item.id}`} key={item.id} element={<ProductDetail item={item}></ProductDetail>}></Route>)}
+                  {categoryList.map((category) => <Route path={`/${category.cat}`} key={category.cat} element={<CategoryPage category={category.title} datas={datas}></CategoryPage>}></Route>)}
+                  <Route path='/cart' element={<CartPage></CartPage>}></Route>
+                  <Route path='*' element={<NotFound></NotFound>}></Route>
+                </Routes>
+              </Suspense>
             </section>
             <Footer></Footer>
         </section>

@@ -10,7 +10,7 @@ const ThemeSwitch = () => {
     if (isDarkMode) {
       themeButton.checked = true;
     } else themeButton.checked = false;
-    const storedDarkMode = localStorage.getItem("darkMode");
+    const storedDarkMode = localStorage.getItem("DARK_MODE");
   
     if (storedDarkMode === "true") {
       setIsDarkMode(true);
@@ -22,7 +22,7 @@ const ThemeSwitch = () => {
   const toggleTheme = () => {
     const updatedIsDarkMode = !isDarkMode;
     setIsDarkMode(updatedIsDarkMode);
-    localStorage.setItem("darkMode", updatedIsDarkMode.toString());
+    localStorage.setItem("DARK_MODE", updatedIsDarkMode.toString());
   };
 
   return (

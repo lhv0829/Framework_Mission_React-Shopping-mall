@@ -1,16 +1,21 @@
 import { useRecoilValue } from "recoil";
+import { useEffect } from 'react'
 import { dataType } from "../../constants/constants";
 import BuyModal from "../Modal/BuyModal";
 import CartItem from "./CartItem";
 import { cartState } from "../../atom/cartState";
 import NoCartItem from "./NoCartItem";
 
-const CartPage = ({datas} : {datas:dataType[]}) => {
+const CartPage = () => {
   const cartItems = useRecoilValue(cartState);
+
   let total:number = 0;
   for(let i:number = 0; i < cartItems.length; i++){
     total += Math.round(cartItems[i].price) * cartItems[i].amount;
   }
+  useEffect(() => {
+    
+  });
   return(
     <section className="pt-4 lg:pt-5 pb-4 lg:pb-8 px-4 xl:px-2 xl:container mx-auto">
       <div className="text-sm breadcrumbs">

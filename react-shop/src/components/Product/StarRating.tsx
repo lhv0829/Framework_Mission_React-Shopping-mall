@@ -5,14 +5,19 @@ const StarRating = ({ starRating }: { starRating: number }) => {
       type="radio"
       name="rating-10"
       key={i}
-      className={`bg-yellow-400 mask mask-star-2 mask-half-${
+      className={`bg-yellow-400 cursor-default mask mask-star-2 mask-half-${
         (i % 2) + 1
       }`}
       checked={index === i ? true: false}
       disabled={true}></input>
   ));
 
-  return <div className="rating rating-half">{inputs}</div>;
+  return(
+    <div className="rating rating-half">
+      <input type="radio" name="rating-10" className="rating-hidden" />
+      {inputs}
+    </div>
+  ) ;
 };
 
 export default StarRating;

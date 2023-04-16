@@ -4,7 +4,7 @@ import { cartState } from "../../atom/cartState";
 const BuyModal = () => {
   const [cartItems, setCartItems] = useRecoilState(cartState);
   const buyProducts = () => {
-    localStorage.removeItem('cartItems');
+    localStorage.removeItem('CART_ITEMS');
     setCartItems([]);
   }
   return(

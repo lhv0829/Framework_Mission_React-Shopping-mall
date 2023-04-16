@@ -1,7 +1,7 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Category, dataType, putCartType } from "../../constants/constants";
 import StarRating from "./StarRating";
-import { useState,useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useRecoilState } from "recoil";
 import { cartState } from "../../atom/cartState";
 
@@ -23,30 +23,42 @@ function convertDataToDataType(data: dataType): putCartType {
 
 const ProductDetail = ({ item }:{item:dataType}) => {
   const [cartItems, setCartItems] = useRecoilState(cartState);
+  const { state } = useLocation();
+  const navigate = useNavigate();
+  // const [productData, setProductData] = useState<dataType>(item);
 
   useEffect(() => {
-    const storedCartItems = localStorage.getItem('cartItems')
-    if (storedCartItems) {
-      setCartItems(JSON.parse(storedCartItems));
-    }
-  }, []);
-  
-  const handleAddToCart = (clickedItem : dataType) => {
-    const addProduct = convertDataToDataType(clickedItem);
-    const isItemInCart = cartItems.find(item => item.id === addProduct.id)
-    if (isItemInCart) {
-      setCartItems(prev => 
-        prev.map(item =>
-          item.id === addProduct.id ? { ...item, amount: item.amount + 1 } : item
-        )
-      );
+    const currentCartItems = localStorage.getItem('CART_ITEMS') as string;
+    setCartItems(JSON.parse(currentCartItems));
+  },[]);
+
+  // useEffect(() => {
+  //   setProductData(state)}, [state]);
+    
+  // if (!productData) {
+  //   return <div>Loading...</div>;
+  // }
+
+  const handleAddToCart = () => {
+    const addProduct = convertDataToDataType(item);
+    if(cartItems){
+      const isItemInCart = cartItems.find(item => item.id === addProduct.id)
+      if (isItemInCart) {
+        setCartItems(prev => 
+          prev.map(item =>
+            item.id === addProduct.id ? { ...item, amount: item.amount + 1 } : item
+          )
+        );
+      } else {
+        setCartItems(prev => [...prev, { ...addProduct, amount: 1 }]);
+      }
     } else {
-      setCartItems(prev => [...prev, { ...addProduct, amount: 1 }]);
+      setCartItems([addProduct]);
     }
   };
 
   useEffect(() => {
-    localStorage.setItem('cartItems', JSON.stringify(cartItems))
+    localStorage.setItem('CART_ITEMS', JSON.stringify(cartItems))
   }, [cartItems])
 
   return(
@@ -74,7 +86,7 @@ const ProductDetail = ({ item }:{item:dataType}) => {
             </div>
             <p className="mt-2 mb-4 text-3xl">{`$${Math.round(item.price)}`}</p>
             <div className="card-actions">
-              <button className="btn btn-primary" onClick={() => handleAddToCart(item)}>장바구니에 담기</button>
+              <button className="btn btn-primary" onClick={handleAddToCart}>장바구니에 담기</button>
               <Link className="btn btn-outline ml-1" to="/cart">장바구니로 이동</Link>
             </div>
           </div>

@@ -8,7 +8,7 @@ const CartItem = ({ item }:{item:putCartType}) => {
   const [cartItems, setCartItems] = useRecoilState<putCartType[]>(cartState);
 
   useEffect(() => {
-    const storedCartItems = localStorage.getItem("cartItems");
+    const storedCartItems = localStorage.getItem("CART_ITEMS");
     if (storedCartItems) {
       setCartItems(JSON.parse(storedCartItems));
     }
@@ -30,7 +30,7 @@ const CartItem = ({ item }:{item:putCartType}) => {
   };
 
   useEffect(() => {
-    localStorage.setItem("cartItems", JSON.stringify(cartItems.filter(item => item.amount > 0)));
+    localStorage.setItem("CART_ITEMS", JSON.stringify(cartItems.filter(item => item.amount > 0)));
   }, [cartItems]);
 
   return(

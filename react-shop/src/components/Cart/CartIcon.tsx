@@ -5,9 +5,11 @@ import { cartState } from "../../atom/cartState";
 const CartIcon = () => {
   const cartItems = useRecoilValue(cartState);
   let cartItemCount:number =0;
-  for(let i:number = 0; i < cartItems.length; i++){
-    cartItemCount += cartItems[i].amount;
-  } 
+  if(cartItems){
+    for(let i:number = 0; i < cartItems.length; i++){
+      cartItemCount += cartItems[i].amount;
+    } 
+  }
   
   return(
     <Link to="/cart" className="btn w-10 sm:w-12 ml-1 btn-ghost">
