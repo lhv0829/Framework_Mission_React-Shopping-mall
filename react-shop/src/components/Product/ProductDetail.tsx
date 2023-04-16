@@ -1,4 +1,4 @@
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Category, dataType, putCartType } from "../../constants/constants";
 import StarRating from "./StarRating";
 import { useEffect, useState } from 'react'
@@ -23,9 +23,6 @@ function convertDataToDataType(data: dataType): putCartType {
 
 const ProductDetail = ({ item }:{item:dataType}) => {
   const [cartItems, setCartItems] = useRecoilState(cartState);
-  const { state } = useLocation();
-  const navigate = useNavigate();
-  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const currentCartItems = localStorage.getItem('CART_ITEMS') as string;
@@ -53,14 +50,6 @@ const ProductDetail = ({ item }:{item:dataType}) => {
   useEffect(() => {
     localStorage.setItem('CART_ITEMS', JSON.stringify(cartItems))
   }, [cartItems])
-
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
-
-  if (!item) {
-    return <div>Item not found</div>;
-  }
 
   return(
     <section className="xl:container pt-4 lg:pt-12 pb-4 lg:pb-8 px-4 xl:px-2 mx-auto">

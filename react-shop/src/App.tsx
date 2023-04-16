@@ -12,6 +12,8 @@ import { dataState } from './atom/dataState'
 import NotFound from './components/Page/NotFound'
 import { cartState } from './atom/cartState'
 import Loader from './components/Loader'
+import Scroll from './components/Scroll'
+import useScrollPosition from "@react-hook/window-scroll";
 
 function App() {
   const [datas, setDatas] = useRecoilState(dataState);
@@ -19,6 +21,7 @@ function App() {
   const [cartItems, setCartItems] = useRecoilState(cartState);
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
+  const scrollY = useScrollPosition(60);
 
   const MainPage = lazy(() => import('./components/Page/MainPage'));
   const ProductDetail = lazy(() => import('./components/Product/ProductDetail'));
@@ -43,6 +46,18 @@ function App() {
     fetchData();
     const currentCartItems = localStorage.getItem('CART_ITEMS') as string;
     setCartItems(JSON.parse(currentCartItems));
+    console.log(scrollY);
+  }, []);
+  useEffect(() => {
+    const handleScroll =() => {
+      console.log(scrollY);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
   }, []);
 
   useEffect(() => {
@@ -58,6 +73,7 @@ function App() {
 
   return (
       <Router>
+        <Scroll/>
         <input type="checkbox" id="side-menu" className="drawer-toggle"></input>
         <section className={`drawer-content`}>
             <Nav></Nav>
