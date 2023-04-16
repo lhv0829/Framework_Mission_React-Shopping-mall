@@ -2,14 +2,10 @@ import { useEffect, lazy, Suspense, useState } from 'react'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import './App.css'
 import Nav from './components/NavigationBar/Nav'
-// import MainPage from './components/Page/MainPage'
 import Footer from './components/Footer/Footer'
 import getData from './assets/data'
 import DrawerSide from './components/NavigationBar/DrawerSide'
-// import ProductDetail from './components/Product/ProductDetail'
 import { dataType, categoryList } from './constants/constants'
-// import CategoryPage from './components/Page/CategoryPage'
-// import CartPage from './components/Cart/CartPage'
 import { useRecoilState, useRecoilValue } from 'recoil'
 import { darkModeState } from './atom/darkModeState'
 import { dataState } from './atom/dataState'
@@ -66,13 +62,13 @@ function App() {
         <section className={`drawer-content`}>
             <Nav></Nav>
             <section className='main pt-16'>
-              <Suspense fallback={<Loader></Loader>}>
+              <Suspense fallback={<Loader/>}>
                 <Routes>
                   <Route path='/' element={<MainPage datas={datas}></MainPage>}></Route>
                   {datas.map((item:dataType) => <Route path={`/product/${item.id}`} key={item.id} element={<ProductDetail item={item}></ProductDetail>}></Route>)}
                   {categoryList.map((category) => <Route path={`/${category.cat}`} key={category.cat} element={<CategoryPage category={category.title} datas={datas}></CategoryPage>}></Route>)}
                   <Route path='/cart' element={<CartPage></CartPage>}></Route>
-                  <Route path='*' element={<NotFound></NotFound>}></Route>
+                  <Route path='/grocery' element={<NotFound></NotFound>}></Route>
                 </Routes>
               </Suspense>
             </section>

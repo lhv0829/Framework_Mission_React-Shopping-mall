@@ -25,19 +25,12 @@ const ProductDetail = ({ item }:{item:dataType}) => {
   const [cartItems, setCartItems] = useRecoilState(cartState);
   const { state } = useLocation();
   const navigate = useNavigate();
-  // const [productData, setProductData] = useState<dataType>(item);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const currentCartItems = localStorage.getItem('CART_ITEMS') as string;
     setCartItems(JSON.parse(currentCartItems));
   },[]);
-
-  // useEffect(() => {
-  //   setProductData(state)}, [state]);
-    
-  // if (!productData) {
-  //   return <div>Loading...</div>;
-  // }
 
   const handleAddToCart = () => {
     const addProduct = convertDataToDataType(item);
@@ -61,8 +54,16 @@ const ProductDetail = ({ item }:{item:dataType}) => {
     localStorage.setItem('CART_ITEMS', JSON.stringify(cartItems))
   }, [cartItems])
 
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (!item) {
+    return <div>Item not found</div>;
+  }
+
   return(
-    <section className="xl:container pt-6 lg:pt-12 pb-4 lg:pb-8 px-4 xl:px-2 mt-10 mx-auto">
+    <section className="xl:container pt-4 lg:pt-12 pb-4 lg:pb-8 px-4 xl:px-2 mx-auto">
       <div>
         <div className="text-sm breadcrumbs">
           <ul>
