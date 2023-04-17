@@ -4,9 +4,6 @@ import { dataType } from "../../constants/constants";
 
 const ProductCard = ({ item } : {item:dataType}) => {
 
-  const clickHandler = (event:React.MouseEvent<HTMLAnchorElement>) => {
-    event.preventDefault();
-  };
   return(
     <Link to={`/product/${item.id}`} className="card card-bordered border-gray-200 dark:border-gray-800 card-compact lg:card-normal">
       <figure className="flex h-80 bg-white overflow-hidden">

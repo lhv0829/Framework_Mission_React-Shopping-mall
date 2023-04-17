@@ -1,5 +1,5 @@
 import { useEffect, lazy, Suspense, useState } from 'react'
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Routes, RedirectFunction } from 'react-router-dom'
 import './App.css'
 import Nav from './components/NavigationBar/Nav'
 import Footer from './components/Footer/Footer'
@@ -11,8 +11,13 @@ import { dataState } from './atom/dataState'
 import NotFound from './components/Page/NotFound'
 import { cartState } from './atom/cartState'
 import Loader from './components/Loader'
-import ScrollToTop from './components/ScrollToTop'
 import axios from 'axios'
+import ScrollToTop from './components/ScrollToTop'
+
+const MainPage = lazy(() => import('./components/Page/MainPage'));
+const ProductDetail = lazy(() => import('./components/Product/ProductDetail'));
+const CategoryPage = lazy(() => import('./components/Page/CategoryPage'));
+const CartPage = lazy(() => import('./components/Cart/CartPage'))
 
 function App() {
   const [datas, setDatas] = useRecoilState(dataState);
@@ -21,10 +26,6 @@ function App() {
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
 
-  const MainPage = lazy(() => import('./components/Page/MainPage'));
-  const ProductDetail = lazy(() => import('./components/Product/ProductDetail'));
-  const CategoryPage = lazy(() => import('./components/Page/CategoryPage'));
-  const CartPage = lazy(() => import('./components/Cart/CartPage'))
   
   useEffect(() => {
     const url = 'https://fakestoreapi.com/products';
@@ -69,7 +70,8 @@ function App() {
                   {datas.map((item:dataType) => <Route path={`/product/${item.id}`} key={item.id} element={<ProductDetail item={item}></ProductDetail>}></Route>)}
                   {categoryList.map((category) => <Route path={`/${category.cat}`} key={category.cat} element={<CategoryPage category={category.title} datas={datas}></CategoryPage>}></Route>)}
                   <Route path='/cart' element={<CartPage></CartPage>}></Route>
-                  <Route path='/grocery' element={<NotFound></NotFound>}></Route>
+                  {/* <Route path='/grocery' element={<NotFound></NotFound>}></Route> */}
+                  <Route path='*' element={<NotFound></NotFound>}></Route>
                 </Routes>
               </Suspense>
             </section>
