@@ -1,5 +1,5 @@
 const StarRating = ({ starRating }: { starRating: number }) => {
-  const index = Math.round(starRating * 2) - 1;
+  const index = Math.floor(starRating * 2 - 1);
   const inputs = Array.from({ length: 10 }, (_, i) => (
     <input
       type="radio"
@@ -16,6 +16,16 @@ const StarRating = ({ starRating }: { starRating: number }) => {
     <div className="rating rating-half">
       <input type="radio" name="rating-10" className="rating-hidden" />
       {inputs}
+      {/* <input type="radio" name="rating-10" className="bg-green-500 mask mask-star-2 mask-half-1" />
+      <input type="radio" name="rating-10" className="bg-green-500 mask mask-star-2 mask-half-2" />
+      <input type="radio" name="rating-10" className="bg-green-500 mask mask-star-2 mask-half-1" checked />
+      <input type="radio" name="rating-10" className="bg-green-500 mask mask-star-2 mask-half-2" />
+      <input type="radio" name="rating-10" className="bg-green-500 mask mask-star-2 mask-half-1" />
+      <input type="radio" name="rating-10" className="bg-green-500 mask mask-star-2 mask-half-2" />
+      <input type="radio" name="rating-10" className="bg-green-500 mask mask-star-2 mask-half-1" />
+      <input type="radio" name="rating-10" className="bg-green-500 mask mask-star-2 mask-half-2" />
+      <input type="radio" name="rating-10" className="bg-green-500 mask mask-star-2 mask-half-1" />
+      <input type="radio" name="rating-10" className="bg-green-500 mask mask-star-2 mask-half-2" /> */}
     </div>
   ) ;
 };

@@ -29,27 +29,25 @@ const ProductDetail = ({ item }:{item:dataType}) => {
     setCartItems(JSON.parse(currentCartItems));
   },[]);
 
-  const handleAddToCart = () => {
+  const handleAddToCart = (event:React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
     const addProduct = convertDataToDataType(item);
+    let updatedCartItems = [];
     if(cartItems){
       const isItemInCart = cartItems.find(item => item.id === addProduct.id)
       if (isItemInCart) {
-        setCartItems(prev => 
-          prev.map(item =>
-            item.id === addProduct.id ? { ...item, amount: item.amount + 1 } : item
-          )
-        );
+        updatedCartItems = cartItems.map(item => item.id === addProduct.id ? { ...item, amount: item.amount + 1 } : item);
+        setCartItems(updatedCartItems);
       } else {
-        setCartItems(prev => [...prev, { ...addProduct, amount: 1 }]);
+        updatedCartItems = [...cartItems, { ...addProduct, amount: 1 }];
+        setCartItems(updatedCartItems);
       }
     } else {
-      setCartItems([addProduct]);
+      updatedCartItems = [addProduct];
+      setCartItems(updatedCartItems);
     }
+    localStorage.setItem('CART_ITEMS', JSON.stringify(updatedCartItems));
   };
-
-  useEffect(() => {
-    localStorage.setItem('CART_ITEMS', JSON.stringify(cartItems))
-  }, [cartItems])
 
   return(
     <section className="xl:container pt-4 lg:pt-12 pb-4 lg:pb-8 px-4 xl:px-2 mx-auto">
