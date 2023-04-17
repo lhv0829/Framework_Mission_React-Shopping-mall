@@ -3,7 +3,6 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import './App.css'
 import Nav from './components/NavigationBar/Nav'
 import Footer from './components/Footer/Footer'
-import getData from './assets/data'
 import DrawerSide from './components/NavigationBar/DrawerSide'
 import { dataType, categoryList } from './constants/constants'
 import { useRecoilState, useRecoilValue } from 'recoil'
@@ -13,6 +12,7 @@ import NotFound from './components/Page/NotFound'
 import { cartState } from './atom/cartState'
 import Loader from './components/Loader'
 import ScrollToTop from './components/ScrollToTop'
+import axios from 'axios'
 
 function App() {
   const [datas, setDatas] = useRecoilState(dataState);
@@ -28,20 +28,19 @@ function App() {
   
   useEffect(() => {
     const url = 'https://fakestoreapi.com/products';
-    const fetchData = async () => {
+    const getData = async (url:string) => {
       setIsError(false);
       setIsLoading(true);
-
       try {
-        const data = await getData(url);
-        setDatas(data);
+        const response = await axios.get(url);
+        setDatas(response.data);
       } catch (error) {
         setIsError(true);
       }
 
       setIsLoading(false);
     };
-    fetchData();
+    getData(url);
     const currentCartItems = localStorage.getItem('CART_ITEMS') as string;
     setCartItems(JSON.parse(currentCartItems));
   }, []);
