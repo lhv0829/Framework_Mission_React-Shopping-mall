@@ -22,16 +22,16 @@ function convertDataToDataType(data: dataType): putCartType {
   }
 }
 
-const ProductDetail = () => {
+const ProductDetail = ({ item }:{item:dataType}) => {
   const [cartItems, setCartItems] = useRecoilState(cartState);
-  const datas = useRecoilValue(dataState);
-  const { id } = useParams<{id:string}>();
+  // const datas = useRecoilValue(dataState);
+  // const { id } = useParams<{id:string}>();
 
-  const item = datas.find(item => String(item.id) === id) ?? datas[0];
+  // const item = datas.find(item => String(item.id) === id) ?? datas[0];
 
   useEffect(() => {
     const currentCartItems = localStorage.getItem('CART_ITEMS') as string;
-    setCartItems(JSON.parse(currentCartItems));
+    if(currentCartItems !== null) setCartItems(JSON.parse(currentCartItems));
   },[]);
 
   const handleAddToCart = (event:React.MouseEvent<HTMLButtonElement>) => {

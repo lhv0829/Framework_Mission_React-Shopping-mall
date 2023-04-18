@@ -1,5 +1,5 @@
 import { useEffect, lazy, Suspense, useState } from 'react'
-import { BrowserRouter as Router, Route, Routes, RedirectFunction } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import './App.css'
 import Nav from './components/NavigationBar/Nav'
 import Footer from './components/Footer/Footer'
@@ -67,8 +67,8 @@ function App() {
               <Suspense fallback={<Loader/>}>
                 <Routes>
                   <Route path='/' element={<MainPage datas={datas}></MainPage>}></Route>
-                  {/* {datas.map((item:dataType) => <Route path={`/product/${item.id}`} key={item.id} element={<ProductDetail item={item}></ProductDetail>}></Route>)} */}
-                  <Route path={`/product/:id`} element={<ProductDetail></ProductDetail>}></Route>
+                  {datas.map((item:dataType) => <Route path={`/product/${item.id}`} key={item.id} element={<ProductDetail item={item}></ProductDetail>}></Route>)}
+                  {/* <Route path={`/product/:id`} element={<ProductDetail></ProductDetail>}></Route> */}
                   {categoryList.map((category) => <Route path={`/${category.cat}`} key={category.cat} element={<CategoryPage category={category.title} datas={datas}></CategoryPage>}></Route>)}
                   <Route path='/cart' element={<CartPage></CartPage>}></Route>
                   {/* <Route path='/grocery' element={<NotFound></NotFound>}></Route> */}
