@@ -10,8 +10,10 @@ const CartPage = () => {
   const cartItems = useRecoilValue(cartState);
 
   let total:number = 0;
-  for(let i:number = 0; i < cartItems.length; i++){
-    total += Math.round(cartItems[i].price) * cartItems[i].amount;
+  if(cartItems){   
+    for(let i:number = 0; i < cartItems.length; i++){
+      total += Math.round(cartItems[i].price) * cartItems[i].amount;
+    }
   }
   useEffect(() => {
     
@@ -25,10 +27,11 @@ const CartPage = () => {
         </ul>
       </div>
       <div className="mt-6 md:mt-14 px-2 lg:px-0">
-        {cartItems.length === 0 && <NoCartItem></NoCartItem>}
+        {cartItems === null && <NoCartItem></NoCartItem>}
         <div className="lg:flex justify-between mb-20">
           <div>
-            {cartItems.map(item => <CartItem item={item} key={item.id}></CartItem>)}
+            {cartItems && cartItems.map(item => <CartItem item={item} key={item.id}></CartItem>)}
+            {/* {cartItems.map(item => <CartItem item={item} key={item.id}></CartItem>)} */}
           </div>
           <div className="self-start shrink-0 flex items-center mt-10 mb-20">
             <span className="text-xl md:text-2xl">{`총 : $${total}`}</span>
