@@ -27,7 +27,7 @@ const CartPage = () => {
         </ul>
       </div>
       <div className="mt-6 md:mt-14 px-2 lg:px-0">
-        {cartItems === null && <NoCartItem></NoCartItem>}
+        {(cartItems === null || cartItems.length === 0)&& <NoCartItem></NoCartItem>}
         <div className="lg:flex justify-between mb-20">
           <div>
             {cartItems && cartItems.map(item => <CartItem item={item} key={item.id}></CartItem>)}
