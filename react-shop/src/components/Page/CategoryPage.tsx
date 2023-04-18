@@ -13,7 +13,7 @@ const CategoryPage = ({category, datas}:{category:string, datas:dataType[]}) => 
     </div>
     <article className="pt-2 lg:pt-4 pb-4 lg:pb-8 px-4 xl:px-2 mb-20 xl:container mx-auto">
       <h2 className="mb-5 lg:mb-8 text-3xl lg:text-4xl text-center font-bold">{category}</h2>
-      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4 item_list" data-scroll='true'>
+      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4 item_list" data-scroll='false'>
         {categoryData.map(item => <ProductCard item={item} key={item.id}></ProductCard>)}
       </div>
     </article>
