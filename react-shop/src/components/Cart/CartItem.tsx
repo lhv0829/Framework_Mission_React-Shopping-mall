@@ -18,8 +18,15 @@ const CartItem = ({ item }:{item:putCartType}) => {
     setCartItems(prev =>
       prev.map(item =>
         item.id === id ? { ...item, amount: item.amount - 1 } : item
-      ).filter(item => item.amount > 0)
+      )
     );
+    setCartItems(prev => {
+      const updatedCartItems = prev.filter(item => item.amount > 0);
+      if (updatedCartItems.length !== prev.length) {
+        localStorage.setItem("CART_ITEMS", JSON.stringify(updatedCartItems));
+      }
+      return updatedCartItems;
+    });
   };
 
   const handleIncrement = (id: number) => {
