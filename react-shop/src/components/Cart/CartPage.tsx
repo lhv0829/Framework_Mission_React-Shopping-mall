@@ -31,7 +31,6 @@ const CartPage = () => {
         <div className="lg:flex justify-between mb-20">
           <div>
             {cartItems && cartItems.map(item => <CartItem item={item} key={item.id}></CartItem>)}
-            {/* {cartItems.map(item => <CartItem item={item} key={item.id}></CartItem>)} */}
           </div>
           <div className="self-start shrink-0 flex items-center mt-10 mb-20">
             <span className="text-xl md:text-2xl">{`총 : $${total}`}</span>
