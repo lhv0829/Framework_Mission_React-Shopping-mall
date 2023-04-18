@@ -38,3 +38,12 @@
       overflow-x: auto;
   }
 }
+
+@media screen and (max-width: 1024px){
+  .carousel-container .carousel-slide .carousel-description {
+      bottom: 0;
+  }
+  .carousel-container .control-arrow {
+      display: none;
+  }
+}
