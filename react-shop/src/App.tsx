@@ -67,11 +67,12 @@ function App() {
               <Suspense fallback={<Loader/>}>
                 <Routes>
                   <Route path='/' element={<MainPage datas={datas}></MainPage>}></Route>
-                  {datas.map((item:dataType) => <Route path={`/product/${item.id}`} key={item.id} element={<ProductDetail item={item}></ProductDetail>}></Route>)}
+                  {/* {datas.map((item:dataType) => <Route path={`/product/${item.id}`} key={item.id} element={<ProductDetail item={item}></ProductDetail>}></Route>)} */}
+                  <Route path={`/product/:id`} element={<ProductDetail></ProductDetail>}></Route>
                   {categoryList.map((category) => <Route path={`/${category.cat}`} key={category.cat} element={<CategoryPage category={category.title} datas={datas}></CategoryPage>}></Route>)}
                   <Route path='/cart' element={<CartPage></CartPage>}></Route>
-                  <Route path='/grocery' element={<NotFound></NotFound>}></Route>
-                  {/* <Route path='*' element={<NotFound></NotFound>}></Route> */}
+                  {/* <Route path='/grocery' element={<NotFound></NotFound>}></Route> */}
+                  <Route path='*' element={<NotFound></NotFound>}></Route>
                 </Routes>
               </Suspense>
             </section>

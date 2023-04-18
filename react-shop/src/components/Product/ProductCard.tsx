@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom";
 import { dataType } from "../../constants/constants";
+import { useRecoilState } from "recoil";
+import { itemState } from '../../atom/itemState'
 
 
 const ProductCard = ({ item } : {item:dataType}) => {

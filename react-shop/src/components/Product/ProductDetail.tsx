@@ -1,9 +1,10 @@
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { Category, dataType, putCartType } from "../../constants/constants";
 import StarRating from "./StarRating";
 import { useEffect, useState } from 'react'
-import { useRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import { cartState } from "../../atom/cartState";
+import { dataState } from "../../atom/dataState";
 
 function convertDataToDataType(data: dataType): putCartType {
   return {
@@ -21,8 +22,12 @@ function convertDataToDataType(data: dataType): putCartType {
   }
 }
 
-const ProductDetail = ({ item }:{item:dataType}) => {
+const ProductDetail = () => {
   const [cartItems, setCartItems] = useRecoilState(cartState);
+  const datas = useRecoilValue(dataState);
+  const { id } = useParams<{id:string}>();
+
+  const item = datas.find(item => String(item.id) === id) ?? datas[0];
 
   useEffect(() => {
     const currentCartItems = localStorage.getItem('CART_ITEMS') as string;
